@@ -1,0 +1,55 @@
+#save {
+    background-image:linear-gradient(to top right, #1D976C, #93F9B9);
+    border-radius: 8px;
+    box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.19);
+    margin-left:35%;
+    font-weight:bold;
+    padding: 5px;
+    width: 80px;
+    color:white;
+}
+#cancel {
+    color: rgb(180, 179, 179);
+    font-weight: bold;
+}
+ion-buttons {
+    font-family:"Trebuchet MS", Helvetica, sans-serif;
+    margin:12px;
+}
+.profiledata {
+    color:white;
+    margin: 15px;
+}
+label {
+    padding-top:15px;
+    padding-bottom: 15px;
+}
+ion-input {
+    //border-style: solid;
+    border-bottom: 1px solid white;
+    margin-top: -20px;
+    margin-bottom: 5px;
+    padding: -20px;
+}
+.selector {
+    margin-top: -5px;
+    //padding-bottom: 3px;
+    //border-style: solid;
+  }
+  .data_type {
+    --padding-left:20px;
+    --padding-right:20px;
+    align-self:center;
+    text-align: center;
+    //position: relative;
+    border-radius: 10px;
+    border-style :0 solid;
+    background: none;
+    //background-image: linear-gradient(to top right, rgb(10, 43, 194), rgb(211, 147, 204));
+    //box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    color: white;
+    
+  }
+#userClass {
+    margin-top: 10px;
+}

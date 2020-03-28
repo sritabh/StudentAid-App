@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)"
+  pullFactor="0.5"
+  pullMin="100" pullMax="150">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="content">
+    <ion-buttons id="more" style="padding-left: 88%;margin-top:-65px;">
+      <ion-button id="more" (click)="editProfile()">
+        <ion-icon name="create"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-grid>
+      <ion-row><ion-col></ion-col><ion-col><ion-icon class="profile" name="contact"></ion-icon></ion-col><ion-col></ion-col></ion-row>
+      <div id="profile">
+        <ion-row><ion-col></ion-col><ion-col><span id="data_name"><b>{{data_name}}</b><ion-icon *ngIf="isCertified" style="margin-left:5px;border-radius:25px;background-color:white;color:rgb(16, 146, 201);margin-bottom: -3px;" name="checkmark-circle"></ion-icon></span></ion-col><ion-col></ion-col></ion-row>
+        <br>
+        <ion-row><ion-col></ion-col><ion-col><span id="data_branch">{{data_branch}}</span></ion-col><ion-col></ion-col></ion-row>
+      </div>
+    </ion-grid>
+      <div id="profile_detail">
+        <span id="profile_data"><b><span id="profile_defaults">Class:</span></b>{{data_class}}</span>
+        <br>
+        <br>
+        <span id="profile_data"><b><span id="profile_defaults">Email:</span></b>{{data_email}} <ion-icon *ngIf = "EmailVerified != true" style="color:red;margin-bottom:-3px;" name="alert"></ion-icon><ion-icon *ngIf = "EmailVerified" style="color:rgb(55, 222, 40);margin-bottom:-3px;" name="checkmark-circle"></ion-icon></span>
+      </div>
+    <div *ngIf = "EmailVerified != true" class="EmailVerification">
+      Your email is not yet verified
+      <ion-button (click)="verifyEmail()">Verify Now!</ion-button>
+      <p style="font-size:12px"><b>Note:</b>Restart the app after verifying your email or Refresh</p>
+    </div>
+  </div>
+  <div class="center-button">
+    <ion-buttons>
+      <ion-button style="font-weight: bold;color:rgb(185, 185, 185)" (click)="LogOut()">
+        <ion-icon name="power"></ion-icon>Logout
+      </ion-button>
+    </ion-buttons>
+  </div>
+</ion-content>

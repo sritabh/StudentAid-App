@@ -1,0 +1,30 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu swipeEnabled="false" contentId="main-content" type="overlay">
+      <ion-content>
+          <div id="profile_data" class="item item-avatar">
+            <ion-icon class="profile" name="contact"></ion-icon>
+            <h2 id=database_name><b>{{database_name}}</b><span *ngIf="isCertified"><ion-icon style="margin-left:5px;border-radius:25px;background-color:white;color:rgb(16, 146, 201);margin-bottom: -5px;" name="checkmark-circle"></ion-icon></span></h2>
+            <p id="database_branch">{{database_branch}}</p>
+          </div>
+        <ion-list>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-label>
+                {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-item>
+            <ion-icon slot="start" name="power"></ion-icon>
+            <ion-label (click)="LogOut()">Logout</ion-label>
+          </ion-item>
+        </ion-list>
+        <div id="currVersion"><p id="versionText">v{{version}}</p></div>
+      </ion-content>
+    
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

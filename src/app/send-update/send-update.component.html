@@ -1,0 +1,47 @@
+<div class="updateData">
+  <h1 style="text-align: center;">Send Update</h1>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        Title:
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="UpdateTitle"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        Message:
+      </ion-col>
+      <ion-col>
+        <ion-textarea [(ngModel)]="UpdateMessage"></ion-textarea>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        Url:
+      </ion-col>
+      <ion-col>
+        <ion-textarea [(ngModel)]="UpdateURL"></ion-textarea>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        Version:
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="UpdateVersion"></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div id="updating" style="display:none;text-align: center;"><ion-spinner name="dots"></ion-spinner></div>
+  <div id="button">
+  <ion-buttons id="buttons">
+    <ion-button id="save" (click)="send()">
+      Send
+    </ion-button>
+    <ion-button id="cancel" (click)="cancel()">
+      Cancel
+    </ion-button>
+  </ion-buttons>
+</div>

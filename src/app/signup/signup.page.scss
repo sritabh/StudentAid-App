@@ -1,0 +1,92 @@
+.center-button {
+    text-align: center;
+    align-self: center;
+    padding-top: 40px;
+    //top: 100%;
+    //left: 50%;
+  }
+  //ion-content {
+    //--background: linear-gradient(to top right,rgb(46, 20, 245),rgb(245, 20, 170));
+  //}
+  .content {
+    padding-top: 80px;
+    border-radius: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 80px;
+    box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    //background-image: linear-gradient(to top right, rgb(241,13,220), rgb(13,239,215));
+    background-image: linear-gradient(45deg, rgba(0,0,0,1) 1%, rgba(104,104,105,1) 100%);
+    color:white;
+    margin: 15px;
+    background-color: white;
+  }
+  .selector {
+    //width:80px;
+    margin-top: -5px;
+  }
+  .data_type {
+    --padding-left:20px;
+    --padding-right:20px;
+    align-self:center;
+    text-align: center;
+    position: relative;
+    border-radius: 10px;
+    border-style :0 solid;
+    background-image: linear-gradient(to top right, rgb(59, 167, 156), rgb(105, 61, 99));
+    box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    color: white;
+    
+  }
+  .data-input {
+    //--background: rgb(223, 211, 211);
+    //border-radius: 10px;
+    border-bottom: 1px solid #000000;
+    padding-bottom:10px;
+    border-color: lighten($color: #000000, $amount: 80);
+    
+    //border-width: thin;
+  }
+  ion-label {
+      padding-left: 2px;
+      padding-top: 1px;
+  }
+
+  .signup_help {
+      font-size: 10px;
+      padding-top: 10px;
+      color: rgb(227, 227, 227);
+      //text-shadow: 0.5px 0.5px #bac2d4;
+  }
+  #error {
+    font-size: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: none;
+    color: rgb(227, 227, 227);
+  }
+  ion-input {
+    margin-top: -13px;
+    padding: 10px;
+  }
+  ion-row {
+    margin-top: 15px;
+  }
+  ion-content {
+    --background : rgba(0,0,0,0.5);
+  }
+  #loading {
+    text-align: center;
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 85%;
+    background-color: rgb(255,255,255,0.2);
+  }
+  #signupBTN {
+    --border-radius:15px;
+    --background:linear-gradient(45deg, rgba(13,13,22,0.8) 9%, rgba(9,77,162,0.8) 100%);
+  }

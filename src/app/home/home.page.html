@@ -1,0 +1,27 @@
+<!--ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      WELCOME
+    </ion-title>
+    <img align="center" src="../assets/icon/icon.png"/>
+  </ion-toolbar>
+  
+</!--ion-header-->
+<ion-content class="welcome_screen" style="text-align:center;">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)"
+  pullFactor="0.5"
+  pullMin="100" pullMax="150">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="center">
+    
+  </div>
+</ion-content>

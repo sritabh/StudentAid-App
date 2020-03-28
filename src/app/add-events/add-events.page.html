@@ -1,0 +1,116 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title><span class="title">Add {{data_type}}!</span></ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)"
+  pullFactor="0.5"
+  pullMin="100" pullMax="150">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+    <div class="content">
+        <div class="selector">
+          <ion-select class="data_type" (ionChange) = "eventFormisValid()" [(ngModel)]="data_type" placeholder = "Assignment">
+            <ion-select-option value="News" selected>News</ion-select-option>
+            <ion-select-option value="Assignment">Assignment</ion-select-option>
+            <ion-select-option value="Notes">Notes</ion-select-option>
+          </ion-select>
+        </div>
+        <div class="notes" *ngIf = "data_type === 'Notes'">
+          <h1>Add Notes</h1><br>
+          <ion-grid>
+            <ion-row>
+              <ion-col>Select Suject : </ion-col>
+              <ion-col>
+              <div class="notes_sub_selector">
+                <ion-select (ionChange) = "eventFormisValid()" class="data_type" [(ngModel)]="subject" placeholder = "Subject">
+                  <ion-select-option value="BEE">BEE</ion-select-option>
+                    <ion-select-option value="Chemistry">Chemistry</ion-select-option>
+                    <ion-select-option value="BEC">BEC</ion-select-option>
+                    <ion-select-option value="Eng Graphics">EGRA</ion-select-option>
+                    <ion-select-option value="CP">CP</ion-select-option>
+                    <ion-select-option value="ES">ES</ion-select-option>
+                </ion-select>
+              </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>Topic : </ion-col>
+              <ion-col><ion-input (ionChange) = "eventFormisValid()" [(ngModel)] = "notes_title"></ion-input></ion-col>
+            </ion-row>
+        </ion-grid>
+          <input type="file" id="fileselector" (change)="fileSelected($event)" style="display:none;" multiple>
+        <ion-buttons style="text-transform: none;">
+          <ion-button style="text-transform: none;" (click)="openFile()">
+            <ion-icon name="attach"></ion-icon><span>{{FileName}}</span>
+          </ion-button>
+        </ion-buttons>
+        <ion-input id="newFileName" multiple="true" (change)="changeName($event)" [(ngModel)]="newFileName" value={{editName}}></ion-input>
+        </div>
+      <div class="news" *ngIf = "data_type === 'News'">
+        <h1>News Description</h1><br>
+        <ion-textarea (ionChange) = "eventFormisValid()" [(ngModel)] = "event_detail" rows="6" placeholde="Description..."></ion-textarea>
+        <input type="file" id="fileselector" (change)="fileSelected($event)" style="display:none;"/>
+        <ion-buttons style="text-transform: none;">
+          <ion-button style="text-transform: none;" (click)="openFile()">
+            <ion-icon name="attach"></ion-icon><span>{{FileName}}</span>
+          </ion-button>
+        </ion-buttons>
+        <ion-input id="newFileName" (change)="changeName($event)" [(ngModel)]="newFileName" value={{editName}}></ion-input>
+      </div>
+      <div *ngIf = "data_type === 'Assignment'">
+        <ion-grid>
+          <ion-row>
+            <ion-col>Subject:</ion-col>
+            <ion-col>
+                <ion-select (ionChange) = "eventFormisValid()" class="data_type" [(ngModel)]="subject" placeholder="Subject">
+                  <ion-select-option value="BEE">BEE</ion-select-option>
+                  <ion-select-option value="Chemistry">Chemistry</ion-select-option>
+                  <ion-select-option value="BEC">BEC</ion-select-option>
+                  <ion-select-option value="Eng Graphics">EGRA</ion-select-option>
+                  <ion-select-option value="CP">CP</ion-select-option>
+                  <ion-select-option value="ES">ES</ion-select-option>
+                </ion-select>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              Details:
+            </ion-col>
+            <ion-col>
+              <ion-textarea (ionChange) = "eventFormisValid()" [(ngModel)] = "event_detail" placeholde="Description..."></ion-textarea>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>Submission Date:</ion-col>
+            <ion-col>
+              <div class="data_type"><ion-datetime (ionChange) = "dateTest()" [(ngModel)]="currentDate" min = {{min_date}} displayFormat="DD MMM YYYY"></ion-datetime><ion-icon name="arrow-dropdown"></ion-icon></div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <input type="file" id="fileselector" (change)="fileSelected($event)" style="display:none;"/>
+        <ion-buttons style="text-transform: none;">
+          <ion-button style="text-transform: none;" (click)="openFile()">
+            <ion-icon name="attach"></ion-icon><span id="selectedFile">{{FileName}}</span>
+          </ion-button>
+        </ion-buttons>
+        <ion-input id="newFileName" (change)="changeName($event)" [(ngModel)]="newFileName" value={{editName}}></ion-input>
+      </div>
+      <p style="text-align: center;color:white;margin-bottom: -30px; font-style: 'Comic Sans MS', cursive, sans-serif;"><b>{{percentUploaded}}</b></p>
+    </div>
+    <div class="center">
+      <div id = "success"></div>
+      <div id="uploading" style="display:none;"><ion-spinner name="dots"></ion-spinner></div>
+      <ion-button id="submitButton" [disabled] = "eventSubmitDisbled" (click) = "submitDataForm()">Submit</ion-button>
+    </div>
+</ion-content>

@@ -1,0 +1,48 @@
+<h2 style="text-align: center;"><b>Edit {{type}}</b></h2>
+<div *ngIf ="type != 'News'" class="content">
+  <ion-grid>
+    <ion-row>
+      <ion-col>Subject:</ion-col>
+      <ion-col>
+          <ion-select class="data_type" [(ngModel)]="subject" placeholder="Subject">
+            <ion-select-option value="BEE">BEE</ion-select-option>
+            <ion-select-option value="Chemistry">Chemistry</ion-select-option>
+            <ion-select-option value="BEC">BEC</ion-select-option>
+            <ion-select-option value="Eng Graphics">EGRA</ion-select-option>
+            <ion-select-option value="CP">CP</ion-select-option>
+            <ion-select-option value="ES">ES</ion-select-option>
+          </ion-select>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        Details:
+      </ion-col>
+      <ion-col>
+        <ion-textarea [(ngModel)] = "event_detail" placeholde="Description..."></ion-textarea>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>Submission Date:</ion-col>
+      <ion-col>
+        <div class="data_type"><ion-datetime [(ngModel)]="currentDate" min = {{min_date}} displayFormat="DD MMM YYYY"></ion-datetime><ion-icon name="arrow-dropdown"></ion-icon></div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+<div *ngIf ="type == 'News'">
+  <h4 style="text-align: center;">News Description</h4><br>
+  <ion-textarea [(ngModel)] = "event_detail" rows="6" placeholde="Description..."></ion-textarea>
+</div>
+<div id="updating" style="display:none;text-align: center;"><ion-spinner name="dots"></ion-spinner></div>
+<div id="button">
+  <ion-buttons>
+    <ion-button id="save" (click)="save()">
+      Save
+    </ion-button>
+    <ion-button id="cancel" (click)="cancel()">
+      Cancel
+    </ion-button>
+  </ion-buttons>
+</div>
+

@@ -1,0 +1,66 @@
+ion-input {
+    border : line;
+    border-bottom: 1px solid white;
+    padding-bottom:10px;
+    border-color: white;
+    margin-top: -15px;
+    padding: 10px;
+    
+}
+.signup_help {
+    font-size: 10px;
+    padding-top: 10px;
+    color: rgb(227, 227, 227);
+}
+.content {
+    padding-top: 80px;
+    border-radius: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 80px;
+    box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    margin: 15px;
+    background-color: white;
+    //background-image: linear-gradient(to top right, rgb(241,13,220), rgb(13,239,215));
+    background-image: linear-gradient(45deg, rgba(0,0,0,1) 1%, rgba(104,104,105,1) 100%);
+    color:white;
+  }
+ion-row {
+  margin-top: 20px;
+}
+#error {
+    font-size: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: none;
+    color: rgb(227, 227, 227);
+  }
+.center-button {
+    text-align: center;
+    align-self: center;
+    padding-top: 40px;
+    //top: 100%;
+    //left: 50%;
+  }
+  ion-content {
+    //--background : rgb(204, 204, 204);
+    --background : rgba(0,0,0,0.6);
+  }
+  #loginButton {
+    //margin-bottom: 10px;
+    margin-top: 20px;
+    --border-radius:12px;
+    --background:linear-gradient(315deg, #0f0c29,#302b63,#24243e);
+  }
+
+  #forgotPasswordBTN {
+    //margin-bottom: -30px;
+    //--border-radius:0px;
+    --background:none;
+    //margin-top:20px;
+    //--box-shadow:none;
+  }
+  #signupBTN {
+    --border-radius:10px;
+    --background:linear-gradient(45deg, rgba(13,13,22,0.8) 9%, rgba(9,77,162,0.8) 100%);
+  }

@@ -1,0 +1,125 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+/*.DeletePop .alert-message{
+    color:white;
+}*/
+.DeletePop button.DeleteButton {
+    color:white;
+    background-color:rgb(177, 0, 0);
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.19);
+    //font-family: "Comic Sans MS", cursive, sans-serif;
+    text-align: left;
+    font-weight: bold;
+    padding-left:10px;
+    padding-right: 10px;
+}
+.DeletePop button.Cancel {
+    //font-family: "Comic Sans MS", cursive, sans-serif;
+    color: rgb(180, 179, 179);
+    font-weight: bold;
+    
+  }
+.moreOption {
+    //--background:linear-gradient(45deg, rgba(199, 199, 199,1) 100%, rgba(104,104,105,1) 50%);
+    color : rgb(107, 98, 97);
+    --width:150px;
+    
+}
+.loading {
+  font-size: large;
+  color:white;
+  --background: linear-gradient(to top right, rgb(31, 82, 77) 30%, rgb(76, 31, 82));
+  
+}
+@font-face {
+  font-family: openSans;
+  src: url("./font/OpenSans-Regular.ttf")
+}
+@font-face {
+  font-family: PlayFair;
+  src: url("./font/PlayfairDisplay-VariableFont_wght.ttf")
+}
+@font-face {
+  font-family: SourceSansPro;
+  src: url("./font/SourceSansPro-Regular.ttf")
+}
+* {
+  font-family: SourceSansPro;
+}
+  .event-content {
+    border-radius: 15px;
+    color:white;
+    --background:linear-gradient(315deg, #4c4177 0%, #2a5470 74%);
+    //color: rgb(255,255,255);
+  }
+.editProfileOption {
+  --background: linear-gradient(315deg, #4c4177 0%, #2a5470 74%);
+}
+//*{font-family:"Trebuchet MS", Helvetica, sans-serif;}
+.forgotPasswordPop {
+  --background: linear-gradient(315deg, #29539b 0%, #1e3b70 74%);
+  color:white;
+}
+
+ion-refresher {
+  //z-index: -99;
+  background: none;
+  //linear-gradient(45deg,rgb(76, 31, 82),rgb(31, 82, 77) 100%);
+  color:white;
+  //display:none;
+  //height: 100%;
+}
+ion-app {
+  //background:linear-gradient(315deg, #292E49 0%,#536976 74%);
+  background: #536976;
+}
+ion-refresher-content {
+  //position: fixed;
+  //color:rgb(211, 194, 194);
+  //border: 12px solid black;
+  .refresher-pulling-text, .refresher-refreshing-text, .refresher-refreshing-icon, .refresher-pulling-icon {
+    color: #fff !important;
+  }
+  
+  //z-index: 99;
+  //display:none;
+}
+ion-content {
+  --background:linear-gradient(315deg, #292E49 0%,#536976 74%);
+}
+
+ion-toolbar {
+  //margin-top: 0px;
+  //padding-right: 200px;
+  //padding-bottom: 1px;
+  //text-align: left;
+  //--background:linear-gradient(45deg,#614385,#516395 100%);
+  --background:#614385;
+  color:white;
+  text-align: left;
+}

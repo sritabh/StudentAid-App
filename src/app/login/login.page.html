@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar style="text-align: center;">
+    <ion-title><h1>Login</h1></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)"
+  pullFactor="0.5"
+  pullMin="100" pullMax="150">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <form [formGroup]="loginForm">
+    <div class="content">
+        <ion-grid>
+          <ion-row>
+            Email:
+          </ion-row>
+          <ion-row>
+            <ion-input placeholder="Email" formControlName="email" [(ngModel)]="email"></ion-input>
+          </ion-row>
+          <ion-row>
+            Password:
+            <ion-col></ion-col>
+            <ion-col></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-input placeholder="Password" [type]="passwordType" formControlName="password" [(ngModel)]="password"><ion-icon item-end style="font-size: 22px; right:0;position: absolute;" [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon></ion-input>
+          </ion-row>
+        </ion-grid>
+        <div id="error"><ion-icon name="alert" color="red"></ion-icon>Errors</div>
+        <div class="center-button">
+          <ion-button type="submit" [disabled] = "!loginForm.valid" id="loginButton" (click)="submitLogin()">Login</ion-button>
+          <br>
+        </div>
+    </div>
+  </form>
+  <div style="color:white;margin-top:-35px" class="center-button">
+    <p style="text-transform: none;" id="forgotPasswordBTN" (click)="forgotPassword()">
+      <b>Forgot Password?</b>
+    </p>
+    <ion-button id="signupBTN" [routerLink] = "['/signup']">Register</ion-button>
+  </div>
+</ion-content>

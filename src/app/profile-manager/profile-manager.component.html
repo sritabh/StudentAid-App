@@ -1,0 +1,61 @@
+<div class="updateData">
+  <h1 style="text-align: center;">{{profileName}}<ion-icon *ngIf ="profileisCertified===true" style="margin-left:5px;border-radius:25px;background-color:white;color:rgb(16, 146, 201);margin-bottom: -5px;" name="checkmark-circle"></ion-icon></h1>
+  <p style="font-size: 10px; text-align: center;">{{lastActive}}</p>
+  <p style="font-size: 8px;margin-top: -10px; text-align: center;">{{userJoinedOn}}</p>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        Email:
+      </ion-col>
+      <ion-col>
+        <b>{{profileEmail}}</b>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        Class:
+      </ion-col>
+      <ion-col>
+        <b>{{profileClass}}</b>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        Branch:
+      </ion-col>
+      <ion-col>
+        {{profileBranch}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        EmailVerified:
+      </ion-col>
+      <ion-col>
+        {{profileEmailVerified}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        Certified:
+      </ion-col>
+      <ion-col>
+          <ion-select style="margin-top: -10px" class="data_type2" [(ngModel)]="profileIsCertified">
+            <ion-select-option value="true">True</ion-select-option>
+            <ion-select-option value="false">False</ion-select-option>
+          </ion-select>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div id="updating" style="display:none;text-align: center;"><ion-spinner name="dots"></ion-spinner></div>
+  <div id="button" style="margin-bottom: 10px;">
+  <ion-buttons id="buttons">
+    <ion-button id="save" (click)="update()">
+      Save
+    </ion-button>
+    <ion-button id="cancel" (click)="cancel()">
+      Cancel
+    </ion-button>
+  </ion-buttons>
+</div>
+

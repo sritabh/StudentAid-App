@@ -1,0 +1,47 @@
+<h2 style="text-align: center;color:white">Edit Profile</h2>
+<div class="profiledata">
+  <ion-grid>
+    <ion-row>
+        <label>Name:</label>
+    </ion-row>
+    <ion-row>
+      <ion-input [(ngModel)]="userName"></ion-input>
+    </ion-row>
+    <ion-row>
+      <label>Branch:</label>
+    </ion-row>
+    <ion-row>
+      <ion-input [(ngModel)]="userBranch"></ion-input>
+    </ion-row>
+    <ion-row id="userClass">
+      <ion-col>
+        <label>Class:</label>
+      </ion-col>
+      <ion-col>
+        <div class="selector">
+          <ion-select class="data_type" [(ngModel)]="userClass" placeholder="Class">
+            <ion-select-option value="CS A">CS-A</ion-select-option>
+            <ion-select-option value="CS B_EC B">CS-B/EC-B</ion-select-option>
+          </ion-select>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <label>Email:</label>
+    </ion-row>
+    <ion-row>
+      <ion-input [(ngModel)]="userEmail" (ionBlur)="emailChangeWarning()"></ion-input>
+    </ion-row>
+  </ion-grid>
+</div>
+<div id="updating" style="display:none;text-align: center;"><ion-spinner name="dots"></ion-spinner></div>
+<div id="button">
+  <ion-buttons>
+    <ion-button id="save" (click)="save()">
+      Save
+    </ion-button>
+    <ion-button id="cancel" (click)="cancel()">
+      Cancel
+    </ion-button>
+  </ion-buttons>
+</div>

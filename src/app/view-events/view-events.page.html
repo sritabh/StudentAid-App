@@ -1,0 +1,186 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Assignments/News</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="loading" style="display:none;"><ion-spinner name="bubbles"></ion-spinner></div>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)"
+  pullFactor="0.5"
+  pullMin="100" pullMax="150">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="selector">
+    <ion-select class="data_type" [(ngModel)]="data_type" placeholder = "Assignment/News">
+      <ion-select-option value="News" selected>News</ion-select-option>
+      <ion-select-option value="Assignment">Assignment</ion-select-option>
+    </ion-select>
+  </div>
+  
+  
+  <div *ngFor="let p of events.slice().reverse()">
+    <div *ngIf="data_type === 'News'">
+        <div *ngIf = "p[1]['DataType'] === 'News'">
+          <div onload="eventViewed(p[0],p[1]['DataType']);" class ="content">
+            <ion-buttons *ngIf="showOptionbutton" id="more" style="padding-left: 90%;margin-bottom:-30px;">
+              <ion-button id="more" (click)="moreOption($event,p[0],p[1]['DataType'])">
+                <ion-icon name="more"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+            <div class='subject'><b>{{p[1]["Subject"]}}</b></div>
+            <div class='details' style="font-size:16px;text-align: center;"><b><br>{{p[1]["Description"]}}</b></div>
+            <div *ngIf = "checkFile(p[0],p[1]['fileURL'])" class="fileLink">
+              <ion-buttons style="text-transform: none;">
+                <ion-button style="text-transform: none;" (click)="getFileURL(p[0],p[1]['fileURL'])">
+                  <b><ion-icon style="font-size:15px;margin-bottom: -5px; border-style: solid;border-radius: 50px;color: rgb(146, 212, 149,0.6);" name="arrow-round-down"></ion-icon><ion-icon style="font-size:15px;margin-bottom: -2px;" name="document"></ion-icon>{{p[1]["fileURL"]}}</b>
+                </ion-button>
+              </ion-buttons>
+            </div>
+            <div class='added'><span *ngIf="p[1]['Edited']">Edited</span><br><span style="margin-top:2px;margin-bottom:2px;" *ngIf = "getTimesAgo(p[1]['Added on'])">{{ago}}</span><br>By <b>{{p[1]["Submitted By"]}}</b></div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="data_type === 'Assignment'">
+        <div *ngIf = "p[1]['DataType'] === 'Assignment'">
+            <!--Assignment Done view-->
+          <div *ngIf = "checkIfDoneAssignment(p[0]) === true">
+            <div class ="done-content">
+              <ion-buttons *ngIf="showOptionbutton" style="padding-left: 90%;margin-bottom:-30px;">
+                <ion-button (click)="moreOption($event,p[0],p[1]['DataType'])">
+                  <ion-icon name="more"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+              <p style="color:rgb(141, 252, 30);margin-bottom: -35px;" ><ion-icon name="checkmark-circle"></ion-icon><b>Done</b></p>
+              <div class='done-subject'><b>{{p[1]["Subject"]}}</b></div>
+              <div class='done-details'><b><span style="font-size:19px">Details</span></b><br>{{p[1]["Description"]}}</div>
+              <div *ngIf = "checkFile(p[0],p[1]['fileURL'])" class="fileLink">
+                <ion-buttons style="text-transform: none;">
+                  <ion-button style="text-transform: none;" (click)="getFileURL(p[0],p[1]['fileURL'])">
+                    <b><ion-icon style="font-size:15px;margin-bottom: -5px; border-style: solid;border-radius: 50px;color: rgb(146, 212, 149,0.6);" name="arrow-round-down"></ion-icon><ion-icon style="font-size:15px;margin-bottom: -2px;" name="document"></ion-icon>{{p[1]["fileURL"]}}</b>
+                  </ion-button>
+                </ion-buttons>
+              </div>
+              <div class='done-submission_date'><b>Submission Date:</b>{{p[1]["Submission Date"]}}</div>
+              <div class='done-added'><span *ngIf="p[1]['Edited']">Edited</span><br><span style="margin-top:2px;margin-bottom:2px;" *ngIf = "getTimesAgo(p[1]['Added on'])">{{ago}}</span><br>By <b>{{p[1]["Submitted By"]}}</b></div>
+              <div class='done-DoneBy'>Done By <b>{{p[1]["DoneBy"]}}</b></div>
+              <div id = {{p[0]}}></div>
+              <div class='done_button'><ion-button color= "danger" (click)='doneAssignment(p[0],p[1]["DoneBy"])'><ion-icon name="close-circle"></ion-icon>Not Done</ion-button></div>
+            </div>
+          </div>
+          <!--Assignment NOT done view-->
+          <div *ngIf = "checkIfDoneAssignment(p[0]) === false">
+            <div class ="content">
+              <ion-buttons *ngIf="showOptionbutton" style="padding-left: 90%;margin-bottom:-30px;">
+                <ion-button (click)="moreOption($event,p[0],p[1]['DataType'])">
+                  <ion-icon name="more"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+              <div class='subject'><b>{{p[1]["Subject"]}}</b></div>
+              <div class='details'><b><span style="font-size:19px">Details</span></b><br>{{p[1]["Description"]}}</div>
+              <div *ngIf = "checkFile(p[0],p[1]['fileURL'])" class="fileLink">
+                <ion-buttons style="text-transform: none;">
+                  <ion-button style="text-transform: none;" (click)="getFileURL(p[0],p[1]['fileURL'])">
+                    <b><ion-icon style="font-size:15px;margin-bottom: -5px; border-style: solid;border-radius: 50px;color: rgb(146, 212, 149,0.6);" name="arrow-round-down"></ion-icon><ion-icon style="font-size:15px;margin-bottom: -2px;" name="document"></ion-icon>{{p[1]["fileURL"]}}</b>
+                  </ion-button>
+                </ion-buttons>
+              </div>
+              <div class='submission_date'><b>Submission Date</b> : {{p[1]["Submission Date"]}}</div>
+              <div class='added'><span *ngIf="p[1]['Edited']">Edited</span><br><span style="margin-top:2px;margin-bottom:2px;" *ngIf = "getTimesAgo(p[1]['Added on'])">{{ago}}</span><br>By <b>{{p[1]["Submitted By"]}}</b></div>
+              <div class='DoneBy'>Done By <b>{{p[1]["DoneBy"]}}</b></div>
+              <div class='done_button'><ion-button color= "success" (click)='doneAssignment(p[0],p[1]["DoneBy"])' style = "color:black"><ion-icon name='checkmark'></ion-icon>Done</ion-button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    <div *ngIf="data_type === 'Assignment/News'">
+      <div *ngIf = "p[1]['DataType'] === 'News'">
+        <div class ="content">
+          <ion-buttons *ngIf="showOptionbutton" style="padding-left: 90%;margin-bottom:-30px;">
+            <ion-button (click)="moreOption($event,p[0],p[1]['DataType'])">
+              <ion-icon name="more"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <div class='subject'><b>{{p[1]["Subject"]}}</b></div>
+          <div class='details' style="font-size:16px;text-align: center;"><b><br>{{p[1]["Description"]}}</b></div>
+          <div *ngIf = "checkFile(p[0],p[1]['fileURL'])" class="fileLink">
+            <ion-buttons style="text-transform: none;">
+              <ion-button style="text-transform: none;" (click)="getFileURL(p[0],p[1]['fileURL'])">
+                <b><ion-icon style="font-size:15px;margin-bottom: -5px; border-style: solid;border-radius: 50px;color: rgb(146, 212, 149,0.6);" name="arrow-round-down"></ion-icon><ion-icon style="font-size:15px;margin-bottom: -2px;" name="document"></ion-icon>{{p[1]["fileURL"]}}</b>
+              </ion-button>
+            </ion-buttons>
+          </div>
+          
+          <div class='added'><span *ngIf="p[1]['Edited']">Edited</span><br><span style="margin-top:2px;margin-bottom:2px;" *ngIf = "getTimesAgo(p[1]['Added on'])">{{ago}}</span><br>By <b>{{p[1]["Submitted By"]}}</b></div>
+        </div>
+      </div>
+      <div *ngIf = "p[1]['DataType'] === 'Assignment'">
+        <!--Assignment Done view-->
+        <div *ngIf = "checkIfDoneAssignment(p[0]) === true">
+          <div class ="done-content">
+            <ion-buttons *ngIf="showOptionbutton" style="padding-left: 90%;margin-bottom:-30px;">
+              <ion-button (click)="moreOption($event,p[0],p[1]['DataType'])">
+                <ion-icon name="more"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+            <p style="color:rgb(141, 252, 30);margin-bottom: -35px;"><ion-icon name="checkmark-circle"></ion-icon><b>Done</b></p>
+            <div class='done-subject'><b>{{p[1]["Subject"]}}</b></div>
+            <div class='done-details'><b><span style="font-size:19px">Details</span></b><br>{{p[1]["Description"]}}</div>
+            <div *ngIf = "checkFile(p[0],p[1]['fileURL'])" class="fileLink">
+              <ion-buttons style="text-transform: none;">
+                <ion-button style="text-transform: none;" (click)="getFileURL(p[0],p[1]['fileURL'])">
+                  <b><ion-icon style="font-size:15px;margin-bottom: -5px; border-style: solid;border-radius: 50px;color: rgb(146, 212, 149,0.6);" name="arrow-round-down"></ion-icon><ion-icon style="font-size:15px;margin-bottom: -2px;" name="document"></ion-icon>{{p[1]["fileURL"]}}</b>
+                </ion-button>
+              </ion-buttons>
+            </div>
+            <div class='done-submission_date'><b>Submission Date:</b>{{p[1]["Submission Date"]}}</div>
+            <div class='done-added'><span *ngIf="p[1]['Edited']">Edited</span><br><span style="margin-top:2px;margin-bottom:2px;" *ngIf = "getTimesAgo(p[1]['Added on'])">{{ago}}</span><br>By <b>{{p[1]["Submitted By"]}}</b></div>
+            <div class='done-DoneBy'>Done By <b>{{p[1]["DoneBy"]}}</b></div>
+            <div class='done_button'><ion-button color= "danger" (click)='doneAssignment(p[0],p[1]["DoneBy"])'><ion-icon name="close-circle"></ion-icon>Not Done</ion-button></div>
+          </div>
+        </div>
+        <!--Assignment NOT done view-->
+        <div *ngIf = "checkIfDoneAssignment(p[0]) === false">
+          <div class ="content">
+            <ion-buttons *ngIf="showOptionbutton" style="padding-left: 90%;margin-bottom:-30px;">
+              <ion-button (click)="moreOption($event,p[0],p[1]['DataType'])">
+                <ion-icon name="more"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+            <div class='subject'><b>{{p[1]["Subject"]}}</b></div>
+            <div class='details'><b><span style="font-size:19px">Details</span></b><br>{{p[1]["Description"]}}</div>
+            <div *ngIf = "checkFile(p[0],p[1]['fileURL'])" class="fileLink">
+              <ion-buttons style="text-transform: none;">
+                <ion-button style="text-transform: none;" (click)="getFileURL(p[0],p[1]['fileURL'])">
+                  <b><ion-icon style="font-size:15px;margin-bottom: -5px; border-style: solid;border-radius: 50px;color: rgb(146, 212, 149,0.6);" name="arrow-round-down"></ion-icon><ion-icon style="font-size:15px;margin-bottom: -2px;" name="document"></ion-icon>{{p[1]["fileURL"]}}</b>
+                </ion-button>
+              </ion-buttons>
+            </div>
+            <div class='submission_date'><b>Submission Date:</b>{{p[1]["Submission Date"]}}</div>
+            <div class='added'><span *ngIf="p[1]['Edited']">Edited</span><br><span style="margin-top:2px;margin-bottom:2px;" *ngIf = "getTimesAgo(p[1]['Added on'])">{{ago}}</span><br>By <b>{{p[1]["Submitted By"]}}</b></div>
+            <div class='DoneBy'>Done By <b>{{p[1]["DoneBy"]}}</b></div>
+            <div class='done_button'><ion-button color= "success" (click)='doneAssignment(p[0],p[1]["DoneBy"])' style = "color:black"><ion-icon name='checkmark'></ion-icon>Done</ion-button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <!---ion-infinite-scroll threshold="100px" (ionInfinite)="loadAssignment($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll--->
+  
+</ion-content>

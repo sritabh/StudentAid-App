@@ -1,0 +1,21 @@
+
+  span.title{
+    margin-left: -60%;
+  }
+  ion-content {
+    //--background : rgb(204, 204, 204);
+    --background : rgba(0,0,0,0.6);
+  }
+  .content {
+    padding-top: 20px;
+    border-radius: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+    box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    margin: 15px;
+    background-color: white;
+    //background-image: linear-gradient(to top right, rgb(241,13,220), rgb(13,239,215));
+    background-image: linear-gradient(45deg, rgba(0,0,0,1) 1%, rgba(104,104,105,1) 100%);
+    color:white;
+  }

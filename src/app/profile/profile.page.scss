@@ -1,0 +1,74 @@
+.content {
+    padding-top: 80px;
+    border-radius: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 80px;
+    box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    margin: 15px;
+    //background-color: white;
+    background-image: linear-gradient(to top right, #514A9D 0%, #24C6DC 74%);
+    text-align: center;
+    color:white;
+  }
+  .selector {
+    padding-right :35%;
+    padding-left: 35%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    //border-style: solid;
+  }
+  #profile_detail {
+    padding: 15px;
+    text-align: left;
+  }
+  #profile_data {
+    text-align: left;
+    //padding-left: 40px;
+    //padding-right: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  #data_email {
+    text-align: left;
+    padding-left: 60px;
+  }
+  ion-icon.profile {
+    font-size: 128px;
+    align-self: center;
+  }
+  #data_email {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  #profile_defaults {
+    padding-right: 25px;
+    text-align: left;
+  }
+  #data_name {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  span.title{
+    margin-left: -60%;
+  }
+  #loading {
+    text-align: center;
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 85%;
+    background-color: rgb(255,255,255,0.2);
+  }
+  .center-button {
+    text-align: center;
+    align-self: center;
+    padding-left: 36%;
+    color:rgba(0,0,0,0.4);
+    position: relative;
+    //top: 100%;
+    //left: 50%;
+  }

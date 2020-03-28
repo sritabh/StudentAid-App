@@ -1,0 +1,104 @@
+.content {
+    padding-top: 10px;
+    border-radius: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 80px;
+    box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    margin: 15px;
+    background-color: white;
+    //background-image: linear-gradient(315deg, #29539b 0%, #1e3b70 74%);
+    background-image: linear-gradient(to top right, rgb(31, 82, 77), rgb(76, 31, 82));
+    color: white;
+}
+.data_type {
+  --padding-left:20px;
+  --padding-right:20px;
+  align-self:center;
+  text-align: center;
+  //text-overflow: ellipsis;
+  position: relative;
+  border-radius: 12px;
+  border-style :0 solid;
+  background-image: linear-gradient(to top right, rgb(31, 82, 77), rgb(76, 31, 82));
+  box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  color: white;
+  
+}
+#selectedFile {
+  //padding-right:250px
+  width:100px;
+}
+.selector {
+  padding-right :35%;
+  padding-left: 35%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  //border-style: solid;
+}
+.news {
+  text-align: center;
+}
+.notes {
+  text-align: left;
+}
+#submitButton {
+  --border-radius:10px;
+  --background:linear-gradient(315deg, #0f0c29,#302b63,#24243e);
+}
+.notes_sub_selector {
+  //padding-right :35%;
+  //padding-left: 35%;
+  //padding-top: 20px;
+  //align-self: right;
+  margin-top: -10px;
+  //border-style: solid;
+}
+.center {
+    text-align: center;
+    align-self: center;
+    padding-top: 40px;
+}
+ion-input {
+    //--background: rgb(223, 211, 211);
+    //border-radius: 10px;
+    border-bottom: 1px solid #000000;
+    padding-bottom:10px;
+    border-color: lighten($color: #000000, $amount: 80);
+    
+    //border-width: thin;
+  }
+  
+  ion-textarea {
+    //--background: rgb(223, 211, 211);
+    //border-radius: 10px;
+    border: 1px solid white;
+    padding-bottom:10px;
+    border-radius: 20px;
+    //border-color: lighten($color: #000000, $amount: 80);
+    
+    //border-width: thin;
+  }
+#success {
+    display: none;
+    text-align: center;
+}
+#uploading {
+  text-align: center;
+  padding-bottom: -30px;
+  margin-bottom: -30px;
+  color:white;
+  font-weight: 1000;
+}
+#newFileName {
+  //--padding-end:200px;
+  --background:rgb(87, 45, 237,0.1);
+  border-radius: 10px;
+  display: none;
+  
+}
+div.title{
+  text-align: left;
+  align-items: left;
+  align-content: left;
+}

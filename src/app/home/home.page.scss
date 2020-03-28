@@ -1,0 +1,27 @@
+.welcome-card img {
+  max-height: 35vh;
+  overflow: hidden;
+}
+.center {
+  text-align: center;
+  align-self: center;
+  padding-top: 55px;
+}
+h2 {
+  font-size: 50px;
+  color: white;
+}
+.signup_help {
+  display : block;
+  font-size: 10px;
+  color: white;
+  text-align: left;
+}
+img {
+  width: 256px;
+  height: 256px;
+}
+.welcome_screen {
+  --background: linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(15,60,120,1) 70%, rgba(15,60,120,1) 100%);
+  //background-image: url('../../assets/splash.png')
+}
