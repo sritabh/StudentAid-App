@@ -9,26 +9,6 @@ const cors = require("cors")({ origin: true });
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
 //
-/*
- export const testTrigger = functions.region('asia-east2').https.onRequest((request, response) => {
-  const notificationPayload = {
-    notification: {
-      title: "Testing cronjob",
-      body: "Cronjob every x minute now at" + new Date(),
-      click_action:"FCM_PLUGIN_ACTIVITY",
-    },
-    data: {
-     path: '/view-events',
-  },
-  }
-  const tokens: any = ["cFACTB3t2RI:APA91bFgTAANYfKNAt8xMrLKS1-qUSwbF9VBrTC1B3kasiQV7fJY2cXEo5iFIfdh9azBwhgMIVkGK62W-IzMNHJJRvb0C4tmUbI_3KTXo1F2rC9kVJof1tEEEJlsUeXSSAQnN3hihn3c"];
-  response.send("Notification sent<br>SobyDamn<br>"+tokens + notificationPayload);
-  //response.send("Notification sent");
-  console.log("Notification sent");
-  //console.log
-  return admin.messaging().sendToDevice(tokens, notificationPayload)
-});*/
-
 
  export const isDaddy = functions.region('asia-east2').https.onRequest((request, response) => {
    cors(request, response, () => {
