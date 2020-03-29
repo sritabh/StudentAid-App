@@ -27,7 +27,7 @@ export class AppComponent {
   database_branch: string;
   database_name: string;
   isCertified: boolean;
-  version: string="1.0.1";
+  version: string="1.1.0";
   appPages: any = [];
   isDaddy: string;
   public appPages_Certified = [
@@ -161,7 +161,6 @@ export class AppComponent {
     }
   }
   checkUpdateAlert() {
-    this.version = "1.1";
     let popup_message = firebase.database().ref('UPDATE');
     popup_message.on('value', async (data) => {
       let message = data.val();
