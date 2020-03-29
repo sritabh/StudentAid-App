@@ -54,7 +54,7 @@ export class HomePage {
     var text = "Loading...."
     var time = 5000;
     this.Handler.presentLoading(text,time)
-    this.CheckAuth();
+    //this.CheckAuth();
   }
 
 }

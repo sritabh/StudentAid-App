@@ -10,7 +10,6 @@ import 'firebase/messaging';
 import { HandlerService } from './handler.service';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { CloudFunctionProvider } from './cloud-function-service.service';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 import { Network } from '@ionic-native/network/ngx';
@@ -131,7 +130,6 @@ export class AppComponent {
     public Handler: HandlerService,
     private router: Router,
     private http: HttpClient,
-    public cloudFunctonService: CloudFunctionProvider,
     public fcm: FCM,
     private backgroundMode: BackgroundMode,
     private menu:MenuController,

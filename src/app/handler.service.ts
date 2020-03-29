@@ -4,7 +4,7 @@ import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/messaging'
 import * as firebase from 'firebase/app';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, ActivatedRouteSnapshot } from '@angular/router';
 import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
@@ -34,6 +34,26 @@ export class HandlerService {
     public platform:Platform,
     private nav:NavController,
   ) { }
+  canActivate(route: ActivatedRouteSnapshot): boolean {
+    let authInfo = {
+      authenticated: false
+    };
+    firebase.auth().onAuthStateChanged((user) => {
+      //console.log(user)
+      if (user) {
+        //this.router.navigate(["profile"]);
+        this.dismissLoading();
+        this.cleanOpenApp();
+        return true;
+      }
+      else {
+        this.dismissLoading();
+        this.router.navigate(["login"]);
+        return false;
+      }
+    })
+    return true;
+  }
   // high alert with no off button
   // using it to force to do something and not allowing to do anything else unless it's done
   async showHighAlert() {
@@ -139,9 +159,11 @@ export class HandlerService {
           this.userClass = profile.Class
           this.userProfileEmailVerified = profile.EmailVerified;
         })
+        return true;
       }
       else {
         console.log("handler says not logge in")
+        return false;
       }
     })
   }

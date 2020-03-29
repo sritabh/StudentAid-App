@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { HandlerService } from './handler.service';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { CloudFunctionProvider } from './cloud-function-service.service';
 import { HTTP } from '@ionic-native/http/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { MoreOptionComponent } from './more-option/more-option.component';
@@ -54,7 +53,7 @@ import { PowerManagement } from '@ionic-native/power-management/ngx';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, HandlerService, HttpClient, CloudFunctionProvider, HTTP, FCM,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, HandlerService, HttpClient, HTTP, FCM,
     BackgroundMode,
     LocalNotifications,
     Network,
