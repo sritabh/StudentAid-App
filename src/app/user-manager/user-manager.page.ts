@@ -41,11 +41,6 @@ export class UserManagerPage implements OnInit {
     }
   }
   viewUsers() {
-    var text = "Loading...."
-      var time = 30000;
-      if (!this.dataLoaded) {
-        this.Handler.presentLoading(text,time);
-      }
     const users = firebase.database().ref('USERS');
     users.on(('value'),data => {
       if (data) {
@@ -82,6 +77,11 @@ export class UserManagerPage implements OnInit {
     }
       
     })
+    var text = "Loading...."
+    var time = 30000;
+    if (!this.dataLoaded) {
+        this.Handler.presentLoading(text,time);
+      }
   }
   viewProfile(userID) {
     this.profile(userID)
