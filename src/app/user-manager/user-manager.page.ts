@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
@@ -23,7 +22,6 @@ export class UserManagerPage implements OnInit {
   i:number=5;
   totalUser:string;
   constructor(
-    private localNotifications: LocalNotifications,
     private alertCtrl: AlertController, 
     public Handler: HandlerService,
     private popOverCtrl:PopoverController,
@@ -109,7 +107,6 @@ export class UserManagerPage implements OnInit {
     return await popover.present();
   }
   doRefresh(event) {
-    console.log("refreshed")
     setTimeout(() => {
       this.ngOnInit()
       //console.log("chedck for ver " + this.currUser.emailVerified)
@@ -125,7 +122,7 @@ export class UserManagerPage implements OnInit {
         this.currUser = user;
       }
       else {
-        console.log("Login first");
+        //console.log("Login first");
       }
     })
     //console.log(this.isDaddy)

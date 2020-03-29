@@ -51,12 +51,10 @@ export class ViewEventsPage implements OnInit {
 
         users_assignment.on('value', (data) => {
           this.database_assignmentDone = data.val();
-          console.log(this.database_assignmentDone);
           if (this.database_assignmentDone == null) {
             firebase.database().ref('USERS/' + user.uid + '/Assignments/assignmentPath').set(true);
           }
         });
-        console.log('event says logged in');
         users.on('value', (data) => {
           const profile = data.val();
           this.class = profile.Class;
@@ -79,7 +77,6 @@ export class ViewEventsPage implements OnInit {
       }
       var text = "Loading...."
       var time = 10000;
-      console.log(this.dataLoaded)
       if (!this.dataLoaded) {
         this.Handler.presentLoading(text,time);
       }
@@ -244,7 +241,6 @@ getFileURL(key, url) {
   ngOnInit() {
     //this.Handler.connectUSER(); // Warning: page shouldnot start from here else it wont work wont chck if user is ertified
     this.getAssignments();
-    console.log(this.dataLoaded + "onInit")
 
     }
 

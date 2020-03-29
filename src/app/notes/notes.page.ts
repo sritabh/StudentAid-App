@@ -30,13 +30,11 @@ export class NotesPage implements OnInit {
   getNotes(userClass) {
     var text = "Loading...."
       var time = 30000;
-      console.log(this.dataLoaded)
       if (!this.dataLoaded) {
         this.Handler.presentLoading(text,time);
       }
     const Notes = firebase.database().ref(userClass + '/Notes');
     Notes.on('value', (data) => {
-      console.log("notes of "+ userClass)
       if (data) {
         this.Handler.dismissLoading();
         this.dataLoaded = true;

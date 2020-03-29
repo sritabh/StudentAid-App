@@ -78,15 +78,12 @@ export class ProfilePage implements OnInit {
     }, 2000);
   }
   ionViewWillLeave() {
-    console.log("left  profile")
     this.Handler.dismissLoading()
   }
   ngOnInit() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // User logged in already or has just logged in.
-        console.log(user.uid)
-        console.log(user.emailVerified)
         if (!user.emailVerified) {
           this.menu.enable(false)
         }
@@ -98,8 +95,6 @@ export class ProfilePage implements OnInit {
         //this.EmailVerified = user.emailVerified;
         const users = firebase.database().ref('USERS/' + user.uid + '/Profile');
         // this.userData = users;
-        console.log('loggen in');
-
         this.currUserData = users;
         users.update({
           EmailVerified : user.emailVerified

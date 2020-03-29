@@ -5,8 +5,6 @@ import 'firebase/database';
 import 'firebase/messaging'
 import * as firebase from 'firebase/app';
 import { Router, RouterModule, ActivatedRouteSnapshot } from '@angular/router';
-import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
-import { Network } from '@ionic-native/network/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { Platform } from '@ionic/angular';
 @Injectable({
@@ -26,10 +24,8 @@ export class HandlerService {
   uploading: HTMLIonLoadingElement;
   constructor(
     private alertCtrl:AlertController,
-    private network:Network,
     private router: Router,
     public loadingCtrl:LoadingController,
-    private localNotifications: LocalNotifications,
     public fcm:FCM,
     public platform:Platform,
     private nav:NavController,
@@ -94,7 +90,6 @@ export class HandlerService {
           text: this.okButton,
           cssClass: 'primary',
           handler: (user) => {
-            console.log(this.okButton +"says\n" + this.currUser)
             this.onVerifyEmail()
           }
         }
@@ -129,7 +124,7 @@ export class HandlerService {
         this.showAlert(title,msg);
       }
       else {
-        console.log("already dismissed")
+        console.log("Dismissed loading")
       }
     },time);
     await loading.onDidDismiss()
@@ -162,7 +157,6 @@ export class HandlerService {
         return true;
       }
       else {
-        console.log("handler says not logge in")
         return false;
       }
     })
@@ -326,11 +320,7 @@ export class HandlerService {
       ]
     });
     //alert.present()
-    if(show == false) {
-      console.log("show asss")
-    }
-    else if (show == true) {
-      console.log("show alert not connected")
+    if (show == true) {
       await alert.present();
     }
 
@@ -339,18 +329,14 @@ export class HandlerService {
     this.fcm.onNotification().subscribe( data => {
       if(data.wasTapped){
         //Notification was received on device tray and tapped by the user.
-        console.log("notification received type:- " + data.path)
         //console.log(JSON.stringify(data.type));
-        console.log('Received in background');
         //path = data.path
         this.router.navigateByUrl(data.path);
         return true;
       }
       else {
         //Notification was received in foreground. Maybe the user needs to be notified.
-        console.log("notification received type:- " + data.path)
         //console.log(JSON.stringify(data.type));
-        console.log('Received in foreground');
         this.router.navigateByUrl(data.path);
         return true;
         //path = data.path
@@ -359,17 +345,14 @@ export class HandlerService {
     return false;
   }
   cleanOpenApp() {
-    console.log("notification sent")
       var checkForNotification = new Promise((res,rej)=>{
         res(this.openNotification())
       })
       checkForNotification.then((openByNotification)=>{
         if (!openByNotification) {
-          console.log("going to profile")
           return this.router.navigateByUrl('/profile');
         }
         else {
-          console.log("going to notification path");
           return;
         }
         ///console.log("promise is "+openByNotification)
@@ -414,6 +397,7 @@ export class HandlerService {
       }
     });
   }
+  /*
   notificationButton() {
     this.localNotifications.on('done').subscribe(notification =>{
       console.log("Notification done clicked" + notification)
@@ -426,6 +410,6 @@ export class HandlerService {
         }
       })
     })
-  }
+  }*/
 }
 

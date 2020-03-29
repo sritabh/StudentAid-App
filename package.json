@@ -40,7 +40,6 @@
     "cordova-plugin-fcm-with-dependecy-updated": "^4.2.0",
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-firebasex": "^8.0.0",
-    "cordova-plugin-network-information": "^2.0.2",
     "cordova-plugin-powermanagement-orig": "^1.1.2",
     "core-js": "^2.5.4",
     "cors": "^2.8.5",
@@ -97,7 +96,6 @@
       "cordova-plugin-androidx": {},
       "cordova-plugin-androidx-adapter": {},
       "cordova-plugin-fcm-with-dependecy-updated": {},
-      "cordova-plugin-network-information": {},
       "cordova-plugin-background-mode": {},
       "at.gofg.sportscomputer.powermanagement": {}
     },

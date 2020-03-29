@@ -240,14 +240,6 @@ userClass:string;
 }
   ngOnInit() {
     this.eventFormisValid()
-    var d = new Date()
-    var x = d.setHours(0,0,0,0)
-    var y = new Date(x).toISOString()
-    //console.log(this.currentDate.setHours(0,0,0,0))
-    console.log(d)
-    console.log(x)
-    console.log(y)
-    console.log(new Date(new Date(y)).toISOString())
   }
 
 }

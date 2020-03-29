@@ -20,10 +20,6 @@ import { ProfileManagerComponent } from './profile-manager/profile-manager.compo
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { SendUpdateComponent } from './send-update/send-update.component';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-import { OrderByPipe } from './order-by.pipe';
-import { Network } from '@ionic-native/network/ngx';
-import { PowerManagement } from '@ionic-native/power-management/ngx';
 
 @NgModule({
   declarations: [AppComponent,
@@ -55,9 +51,6 @@ import { PowerManagement } from '@ionic-native/power-management/ngx';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, HandlerService, HttpClient, HTTP, FCM,
     BackgroundMode,
-    LocalNotifications,
-    Network,
-    PowerManagement,
   ],
   bootstrap: [AppComponent]
 })

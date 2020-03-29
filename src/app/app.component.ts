@@ -12,8 +12,6 @@ import { Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
-import { Network } from '@ionic-native/network/ngx';
-import { PowerManagement } from '@ionic-native/power-management/ngx';
 
 
 
@@ -27,7 +25,7 @@ export class AppComponent {
   database_branch: string;
   database_name: string;
   isCertified: boolean;
-  version: string="1.1.0";
+  version: string="1.1.1";
   appPages: any = [];
   isDaddy: string;
   public appPages_Certified = [
@@ -133,8 +131,6 @@ export class AppComponent {
     public fcm: FCM,
     private backgroundMode: BackgroundMode,
     private menu:MenuController,
-    private network: Network,
-    private powerManagement:PowerManagement,
   ) {
     this.initializeApp();
     /**
@@ -155,11 +151,6 @@ export class AppComponent {
     });
     this.router.navigateByUrl('/login');
     }
-  handleBackButton() {
-    if (this.platform.backButton) {
-      console.log("Back button pressed")
-    }
-  }
   checkUpdateAlert() {
     let popup_message = firebase.database().ref('UPDATE');
     popup_message.on('value', async (data) => {
@@ -201,7 +192,6 @@ export class AppComponent {
     this.checkUpdateAlert();
     this.appPages = this.appPages_notCertified;
     this.http.get('https://asia-east2-login-session-a9776.cloudfunctions.net/isDaddy', {}).subscribe((data) => {
-      console.log('who is daddy \n' + data['isDaddy']);
       this.isDaddy = data['isDaddy'];
     }, (err) => {
       console.log('error');
@@ -280,7 +270,6 @@ export class AppComponent {
           return
         }
       });
-      this.handleBackButton()
       this.statusBar.backgroundColorByHexString('#614385');
       this.splashScreen.hide();
 
