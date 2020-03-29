@@ -122,7 +122,7 @@ userClass:string;
             this.Handler.showAlert(title,msg);
           });
         });
-      } 
+      }
       else if (this.data_type == 'News') {
           users.once('value', (data) => {
             const profile = data.val();

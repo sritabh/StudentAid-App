@@ -14,12 +14,14 @@ import { SendUpdateComponent } from '../send-update/send-update.component';
 })
 export class UserManagerPage implements OnInit {
   getDate:string;
-  sortUser:string="Name";
+  sortUserBy:string="All";
   currUser:any;
   users_on_screen:number=10;
   users:any = [ ];
   userName:any=[ ];
+  dataLoaded:boolean=false;
   i:number=5;
+  totalUser:string;
   constructor(
     private localNotifications: LocalNotifications,
     private alertCtrl: AlertController, 
@@ -27,18 +29,9 @@ export class UserManagerPage implements OnInit {
     private popOverCtrl:PopoverController,
     private loadingCtrl: LoadingController,
     ) { }
-  test() {
-    console.log("test");
-    this.localNotifications.schedule({
-      id: 1,
-      text: 'Single ILocalNotification',
-      data: { secret: "Assignment" }
-    });
-  }
   loadElements(event) {
     if (this.users_on_screen < this.users.length) {
       setTimeout(() => {
-        //console.log('Done');
         this.users_on_screen += 10;
         event.target.complete();
       }, 500);
@@ -48,35 +41,49 @@ export class UserManagerPage implements OnInit {
     }
   }
   viewUsers() {
+    var text = "Loading...."
+      var time = 30000;
+      if (!this.dataLoaded) {
+        this.Handler.presentLoading(text,time);
+      }
     const users = firebase.database().ref('USERS');
     users.on(('value'),data => {
+      if (data) {
+        this.Handler.dismissLoading();
+        this.dataLoaded = true;
+      }
       const user = data.val()
       var value = Object.entries(user);
-      //console.log(value)
+      this.totalUser ="Total Users: "+ value.length;
       var sortable=[];
-      for (var i=0;i<value.length;i++) {
-        sortable.push([value[i][1]['Profile']['Name'],value[i]]);
-        //console.log(await value[i][1]['Profile']['Name'])
+      //Sort user by name if sorting by any mean Class/Joining time
+      if (this.sortUserBy !="All") {
+        for (var i=0;i<value.length;i++) {
+          sortable.push([value[i][1]['Profile']['Name'],value[i]]);
+        }
+        sortable.sort((a,b) => {
+          if (a[0] > b[0]) {
+            return 1;
+        }
+        if (b[0] > a[0]) {
+            return -1;
+        }
+        return 0;
+      });
+      var sortedName = []
+      sortable.forEach(function(item){
+        sortedName.push(item[1])
+      })
+      this.users=sortedName;
+      return
       }
-      sortable.sort((a,b) => {
-        if (a[0] > b[0]) {
-          return 1;
-      }
-      if (b[0] > a[0]) {
-          return -1;
-      }
-      return 0;
-    });
-    var sortedName = []
-    sortable.forEach(function(item){
-      sortedName.push(item[1])
-    })
-    this.users=sortedName;
+    else {
+      this.users = value
+    }
+      
     })
   }
   viewProfile(userID) {
-
-    var type = "ViewProfile";
     this.profile(userID)
   }
   sendUpdate() {
@@ -110,7 +117,7 @@ export class UserManagerPage implements OnInit {
     }, 2000);
   }
   sortingUsers() {
-    this.users_on_screen = this.users.length;
+    this.viewUsers()
   }
   ngOnInit() {
     firebase.auth().onAuthStateChanged((user) => {

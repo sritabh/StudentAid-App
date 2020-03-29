@@ -18,10 +18,14 @@
       refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
-  <ion-button (click) = "sendUpdate()">Send Update</ion-button>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button style="margin: 25px; --background: #614385;" (click) = "sendUpdate()">
+      <ion-icon name="arrow-dropup"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <ion-label style="color:white;">
     <div class="selector">
-      <ion-select class="data_type" (ionChange)="sortingUsers()" [(ngModel)]="sortUser" placeholder="SortBy">
+      <ion-select class="data_type" (ionChange)="sortingUsers()" [(ngModel)]="sortUserBy" placeholder="SortBy">
         <ion-select-option value="newUser">New User</ion-select-option>
         <ion-select-option value="Name">Name</ion-select-option>
         <ion-select-option value="CS B_EC B">CS-B/EC-B</ion-select-option>
@@ -29,19 +33,28 @@
       </ion-select>
     </div>
   </ion-label>
+  <div style="color:white; text-align: right; margin-right: 10px;">{{totalUser}}</div>
   <ol>
     <ng-container *ngFor="let user of users.slice(0,users_on_screen);let i=index;let j=index;">
-        <ng-container *ngIf="sortUser==='Name'">
-          
+      <ng-container *ngIf="sortUserBy==='All'">
+        <li>
+          <ion-item>
+            <ion-label>
+              <ion-buttons style="padding-bottom: 4px;" slot="start" (click)="viewProfile(user[0])">{{user[1]['Profile']['Name']}}<ion-icon *ngIf ="user[1]['Profile']['isCertified'] == true" style="margin-left:5px;border-radius:25px;background-color:white;color:rgb(16, 146, 201);margin-bottom: -5px;" name="checkmark-circle"></ion-icon></ion-buttons>
+            </ion-label>
+          </ion-item>
+        </li>
+      </ng-container>
+        <ng-container *ngIf="sortUserBy==='Name'">
           <li>
             <ion-item>
-              <ion-label style="font-family:'Comic Sans MS', cursive, sans-serif;">
-                <ion-buttons slot="start" (click)="viewProfile(user[0])">{{user[1]['Profile']['Name']}}<ion-icon *ngIf ="user[1]['Profile']['isCertified'] == true" style="margin-left:5px;border-radius:25px;background-color:white;color:rgb(16, 146, 201);margin-bottom: -5px;" name="checkmark-circle"></ion-icon></ion-buttons>
+              <ion-label>
+                <ion-buttons style="padding-bottom: 4px;" slot="start" (click)="viewProfile(user[0])">{{user[1]['Profile']['Name']}}<ion-icon *ngIf ="user[1]['Profile']['isCertified'] == true" style="margin-left:5px;border-radius:25px;background-color:white;color:rgb(16, 146, 201);margin-bottom: -5px;" name="checkmark-circle"></ion-icon></ion-buttons>
               </ion-label>
             </ion-item>
           </li>
         </ng-container>
-      <ng-container *ngIf="sortUser===user[1]['Profile']['Class']">
+      <ng-container *ngIf="sortUserBy===user[1]['Profile']['Class']">
         <li>
           <ion-item>
             <ion-label style="font-family:'Comic Sans MS', cursive, sans-serif;">
