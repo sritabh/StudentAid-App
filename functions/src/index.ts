@@ -1,14 +1,8 @@
 import * as functions from 'firebase-functions';
-//import { event } from 'firebase-functions/lib/providers/analytics';
 import * as admin from 'firebase-admin'
 admin.initializeApp(functions.config().firebase)
 const cors = require("cors")({ origin: true });
-//const cors = require('cors')
-//const corsHandler = cors({origin: true});
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
 
  export const isDaddy = functions.region('asia-east2').https.onRequest((request, response) => {
    cors(request, response, () => {
@@ -273,4 +267,37 @@ const cors = require("cors")({ origin: true });
     return;
 
   });
+  });
+  export const assignmentSubmissionUpdate = functions.region('asia-east2').database.ref("{classID}/Events/{eventId}/Submission Date")
+ .onUpdate(async (snapshot,context) => {
+   const classID = context.params.classID
+   const eventID = context.params.eventId
+   const availUsers = admin.database().ref('USERS');
+   availUsers.once('value',data =>{
+    var userIDs = Object.keys(data.val())
+    userIDs.forEach((userID)=>{
+      var userData = admin.database().ref('USERS/'+userID);
+      userData.once('value',data=>{
+        const user = data.val()
+        if (user.Profile.Class == classID) {
+          const assignment = admin.database().ref('USERS/'+userID+'/Assignments/'+eventID);
+          assignment.once('value',data=>{
+            const assignmentData = data.val();
+            if (assignmentData) {
+              if (!assignmentData.assignmentDone) {
+                assignment.update({
+                  firstNotification: false,
+                  secondNotification: false,
+                });
+              }
+            }
+            else {
+              return;
+            }
+           
+          })
+        }
+      })
+    })
+   })
   });
