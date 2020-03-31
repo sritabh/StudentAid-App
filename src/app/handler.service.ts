@@ -190,29 +190,29 @@ export class HandlerService {
       ago = "few seconds ago"
     }
     else if (minuteDifference >= 1 && minuteDifference < 60) {
-      ago = minuteDifference + " minute"+this.checkPlural(minuteDifference)+" ago"
+      ago = minuteDifference + " minute"+this.checkPlural(minuteDifference)
     }
     else if (hourDifference >= 1 && hourDifference < 24) {
-      ago = hourDifference + " hour"+this.checkPlural(hourDifference)+" ago"
+      ago = hourDifference + " hour"+this.checkPlural(hourDifference)
     }
     else if (dayDifference >= 1 && dayDifference < 30) {
-      ago = dayDifference + " day"+this.checkPlural(dayDifference)+" ago"
+      ago = dayDifference + " day"+this.checkPlural(dayDifference)
     }
     else if (monthDifference >= 1 && monthDifference < 12) {
-      ago = monthDifference + " month"+this.checkPlural(monthDifference)+" ago"
+      ago = monthDifference + " month"+this.checkPlural(monthDifference)
     }
     else if (yearDifference >= 1) {
-      ago = yearDifference + " year"+this.checkPlural(yearDifference)+" ago"
+      ago = yearDifference + " year"+this.checkPlural(yearDifference)
     }
     //console.log(ago)
     return ago;
   }
   checkPlural(count) {
     if (count > 1) {
-      return 's'
+      return 's ago'
     }
     else {
-      return ''
+      return ' ago'
     }
   }
   /*
