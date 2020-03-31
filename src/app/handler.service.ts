@@ -31,9 +31,6 @@ export class HandlerService {
     private nav:NavController,
   ) { }
   canActivate(route: ActivatedRouteSnapshot): boolean {
-    let authInfo = {
-      authenticated: false
-    };
     firebase.auth().onAuthStateChanged((user) => {
       //console.log(user)
       if (user) {
@@ -193,22 +190,30 @@ export class HandlerService {
       ago = "few seconds ago"
     }
     else if (minuteDifference >= 1 && minuteDifference < 60) {
-      ago = minuteDifference + " minutes ago"
+      ago = minuteDifference + " minute"+this.checkPlural(minuteDifference)+" ago"
     }
     else if (hourDifference >= 1 && hourDifference < 24) {
-      ago = hourDifference + " hours ago"
+      ago = hourDifference + " hour"+this.checkPlural(hourDifference)+" ago"
     }
     else if (dayDifference >= 1 && dayDifference < 30) {
-      ago = dayDifference + " days ago"
+      ago = dayDifference + " day"+this.checkPlural(dayDifference)+" ago"
     }
     else if (monthDifference >= 1 && monthDifference < 12) {
-      ago = monthDifference + " days ago"
+      ago = monthDifference + " month"+this.checkPlural(monthDifference)+" ago"
     }
     else if (yearDifference >= 1) {
-      ago = yearDifference + " year ago"
+      ago = yearDifference + " year"+this.checkPlural(yearDifference)+" ago"
     }
     //console.log(ago)
     return ago;
+  }
+  checkPlural(count) {
+    if (count > 1) {
+      return 's'
+    }
+    else {
+      return ''
+    }
   }
   /*
   checkPendingAssignment(userClass,userID) {

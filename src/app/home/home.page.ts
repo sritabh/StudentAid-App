@@ -52,7 +52,7 @@ export class HomePage {
   }
   ngOnInit() {
     var text = "Loading...."
-    var time = 5000;
+    var time = 10000;
     this.Handler.presentLoading(text,time)
     //this.CheckAuth();
   }

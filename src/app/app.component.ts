@@ -25,7 +25,7 @@ export class AppComponent {
   database_branch: string;
   database_name: string;
   isCertified: boolean;
-  version: string="1.1.1";
+  version: string="1.1.2";
   appPages: any = [];
   isDaddy: string;
   public appPages_Certified = [
