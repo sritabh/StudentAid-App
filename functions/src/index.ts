@@ -15,10 +15,14 @@ const cors = require("cors")({ origin: true });
    const classID = context.params.classID
    const eventData = snapshot.val()
    const eventTitle = eventData.DataType
-   const eventDescription = eventData.Description
+   var eventDescription = eventData.Description
    var prefix :string = ''
    if (eventTitle != "News") {
     prefix = "New "
+    eventDescription = eventData.Description
+   }
+   else {
+    eventDescription = eventData.Description.slice(0,70) + "...."
    }
    const notificationPayload = {
      notification: {
