@@ -109,6 +109,7 @@ const cors = require("cors")({ origin: true });
             const assignmentIDs = Object.keys(data.val())
             assignmentIDs.forEach((assignmentID)=>{
               const devices: any = [];
+              const userReceivedNotification: any = [];
               var assignment = admin.database().ref(cls + "/Events/"+assignmentID)
               assignment.once('value', data=>{
                 const assignmentVal = data.val()
@@ -117,57 +118,67 @@ const cors = require("cors")({ origin: true });
                   const sendNotification = checkTime(assignmentVal['Submission Date'])[0]
                   const notificationType = checkTime(assignmentVal['Submission Date'])[1]
                   if (sendNotification && notificationType) {
-                    var getDevices = new Promise((resolve,reject) => {
+                    console.log("Sending....")
+                    var getDevices = new Promise((res,rej) => {
                       const users = admin.database().ref('USERS');
-                      users.once('value', data=>{
-                        const userIDs = Object.keys(data.val())
                         //get user's device who have not done assignment for the assignments
-                        userIDs.forEach((userID)=>{
-                          var userData = admin.database().ref('USERS/'+userID);
-                          userData.once('value',async data=>{
-                            var user = data.val()
-                            const device = await user.Profile.Device
-                            const userClass = await user.Profile.Class
-                            if (cls == userClass && device && devices.includes(device) != true) {
-                              var userAssignments = admin.database().ref('USERS/'+userID + "/Assignments/" +assignmentID);
-                              userAssignments.once('value', data => {
-                                var userAssignment = data.val()
-                                if (userAssignment) {
-                                  if (!userAssignment.assignmentDone) {
-                                    //Check whether reminder is sent and if not send one
-                                    if (!userAssignment[notificationType.toString()]) {
-                                      //Send notification and update reminder1 to true
-                                      //add device id to the list
-                                      devices.push(device)
-                                      userAssignments.update({
-                                        [notificationType.toString()]: true,
-                                        [notificationType+'At']: currTimeIST,
-                                      });
-                                      resolve()
-                                    }
+                        users.once('value', async data=>{
+                          const userIDs = Object.keys(data.val())
+                          const totalUser = userIDs.length
+                          //Fix-ME
+                          //looping till totalUser as nested hell won't read the last value and will resolve the promise
+                          for (var i=0;i<=totalUser;i++) {
+                            var userID = userIDs[i];
+                              var userData = admin.database().ref('USERS/'+userID);
+                              await userData.once('value', async data=>{
+                                var user = data.val()
+                                if ( i != totalUser) {
+                                  const device = user.Profile.Device
+                                  const userClass = user.Profile.Class
+                                  if (cls == userClass && device && devices.includes(device) != true && i!=totalUser) {
+                                    var userAssignments = admin.database().ref('USERS/'+userID + "/Assignments/" +assignmentID);
+                                    await userAssignments.once('value',async data => {
+                                      var userAssignment = data.val()
+                                      if (userAssignment) {
+                                        if (!userAssignment.assignmentDone) {
+                                          //Check whether reminder is sent and if not send one
+                                          if (!userAssignment[notificationType.toString()]) {
+                                             //Send notification and update reminder1 to true
+                                            //add device id to the list
+                                            userReceivedNotification.push(user.Profile.Name)
+                                            devices.push(device)
+                                            userAssignments.update({
+                                              [notificationType.toString()]: true,
+                                              [notificationType+'At']: currTimeIST,
+                                            });
+                                          }
+                                        }
+                                      }
+                                      //data not found means not interacted with assignment and probably not done
+                                      //send a reminder to this fella
+                                      //this reminder will create the data no need to update for second as data will be existing
+                                      else {
+                                        userReceivedNotification.push(user.Profile.Name)
+                                        devices.push(device)
+                                        userAssignments.update({
+                                          [notificationType.toString()]: true,
+                                          [notificationType+'At']: currTimeIST,
+                                        });
+                                      }
+                                    })
                                   }
                                 }
-                                //data not found means not interacted with assignment and probably not done
-                                //send a reminder to this fella
-                                //this reminder will create the data no need to update for second as data will be existing
-                                else {
-                                  devices.push(device)
-                                  userAssignments.update({
-                                    [notificationType.toString()]: true,
-                                    [notificationType+'At']: currTimeIST,
-                                  });
-                                  resolve()
-                                }
                               })
-                            }
-                          })
+                          }
+                          res() //res the promise as loop ends
                         })
-                      })
                     })
                     ////Send notification to the devices
                     getDevices.then(()=>{
                       sendReminderNotification(devices,assignmentVal.Subject,notificationType);
-                      console.log("Notification sent to\nClass:- "+cls+"\nAssignmentId:- "+assignmentID)
+                      console.log(devices)
+                      console.log(userReceivedNotification)
+                      console.log("Notification sent to\nClass:- "+cls+"\nAssignmentId:- "+assignmentID+" Total devices:-"+devices.length)
                     }).catch((err)=>{
                       console.log("Error - "+err)
                     })
@@ -189,7 +200,7 @@ const cors = require("cors")({ origin: true });
     const actualSubDate = new Date(submissionDate).getTime() + 8*60*60*1000 - 19800000;
     const currTime = new Date().getTime()
     const timeLeft = actualSubDate - currTime
-    if (timeLeft <= 48*3600*1000 && timeLeft >= 40*3600*1000) {
+    if (timeLeft <= 48*3600*1000 && timeLeft >= 42*3600*1000) {
       //console.log("1st notification time hours left " + ((actualSubDate - currTime)/(3600*1000)))
       return [true,'firstNotification'];
     }
@@ -197,7 +208,7 @@ const cors = require("cors")({ origin: true });
       //console.log("Tommorow is the submission date hours left "+ (timeLeft/(3600000)))
       return [true,'secondNotification'];
     }
-    //console.log("hours left " + ((actualSubDate - currTime)/(3600*1000)))
+    //console.log("Not the time for notiffication")
     return [false,null];
     
   }
