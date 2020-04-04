@@ -189,7 +189,7 @@ const cors = require("cors")({ origin: true });
     const actualSubDate = new Date(submissionDate).getTime() + 8*60*60*1000 - 19800000;
     const currTime = new Date().getTime()
     const timeLeft = actualSubDate - currTime
-    if (timeLeft <= 48*3600*1000 && timeLeft >= 42*3600*1000) {
+    if (timeLeft <= 48*3600*1000 && timeLeft >= 40*3600*1000) {
       //console.log("1st notification time hours left " + ((actualSubDate - currTime)/(3600*1000)))
       return [true,'firstNotification'];
     }
