@@ -1,5 +1,7 @@
 # Student-Aid App
 Check available installable file [here!](https://sobydamn.blogspot.com/2020/03/studentaid-app.html)
+<br>
+
 _This project might not be active any more.For more info contact developer!_
 # Screenshots
 ## Option Drawer
